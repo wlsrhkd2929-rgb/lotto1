@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM5 스케줄 업무 혁신 회의 - 사내 공지사항</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#F0F6FF',
+                            100: '#E0EDFF',
+                            500: '#2563EB',
+                            600: '#1D4ED8',
+                            800: '#1E40AF',
+                            900: '#1E3A8A',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #F8FAFC;
+            color: #1E293B;
+        }
+        .card-hover {
+            transition: all 0.25s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(30, 58, 138, 0.15);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-blue-100 selection:text-brand-900">
+
+    <!-- Top Navigation Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-brand-900 text-white w-9 h-9 rounded-lg flex items-center justify-center font-bold text-sm tracking-wider">
+                    PM
+                </div>
+                <span class="text-xs sm:text-sm font-semibold text-slate-500 border-l border-slate-300 pl-3">
+                    사내 전자기안 & Notifications
+                </span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="window.print()" class="px-3 py-1.5 text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-md transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-print"></i>
+                    <span class="hidden sm:inline">인쇄 / PDF</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex-grow w-full">
+        
+        <!-- Header / Top Section -->
+        <section class="bg-white rounded-2xl p-6 sm:p-10 border border-slate-200/80 shadow-sm mb-8 relative overflow-hidden">
+            <!-- Background Decoration -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-50 to-transparent rounded-bl-full pointer-events-none -mr-16 -mt-16"></div>
+
+            <div class="relative z-10">
+                <!-- Badges / Tags -->
+                <div class="flex flex-wrap gap-2.5 items-center mb-4">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-800 border border-brand-100">
+                        <i class="fa-regular fa-calendar-check text-brand-600"></i>
+                        시행일: 2026년 10월 21일 (수)
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                        <i class="fa-solid fa-user-group text-slate-500"></i>
+                        대상: PM5 관련 담당 실무자
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                        <i class="fa-solid fa-circle-exclamation"></i> 긴급 공지
+                    </span>
+                </div>
+
+                <!-- Main Title -->
+                <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+                    PM5 스케줄 업무 혁신 회의
+                </h1>
+
+                <!-- Brief Subtitle -->
+                <p class="text-slate-600 text-base sm:text-lg max-w-3xl leading-relaxed">
+                    생산 효율성 극대화 및 스케줄 변동성 최소화를 위해 PM5 관련 주요 실무자 긴급 안건 회의를 소집합니다.
+                </p>
+
+                <!-- Action Bar -->
+                <div class="mt-6 pt-6 border-t border-slate-100 flex flex-wrap gap-3">
+                    <button onclick="addToCalendar()" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-800 text-white text-sm font-semibold px-4 py-2.5 rounded-lg shadow-sm transition">
+                        <i class="fa-regular fa-calendar-plus"></i>
+                        일정 추가하기 (.ics)
+                    </button>
+                    <button onclick="scrollToContact()" class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold px-4 py-2.5 rounded-lg transition">
+                        <i class="fa-regular fa-paper-plane"></i>
+                        문의하기
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Middle Section: 3 Summary Cards -->
+        <section class="mb-10">
+            <div class="flex items-center justify-between mb-5">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-brand-600"></i>
+                    주요 회의 안건 (핵심 요약)
+                </h2>
+                <span class="text-xs text-slate-500">카드를 클릭하여 상세 정보 확인</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                
+                <!-- Card 1 -->
+                <div class="bg-white rounded-xl p-6 border border-slate-200/80 shadow-sm card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-50 text-brand-600 rounded-xl flex items-center justify-center mb-4 text-xl font-bold">
+                            01
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-lg mb-2">
+                            PM5 스케줄 현황 보고
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            현재 운용 중인 PM5 생산 라인의 실시간 스케줄 이행률 분석 및 주요 병목 구간 점검
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-brand-600 font-medium">
+                        <span>상세 안건 발표</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-xl p-6 border border-slate-200/80 shadow-sm card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-50 text-brand-600 rounded-xl flex items-center justify-center mb-4 text-xl font-bold">
+                            02
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-lg mb-2">
+                            긴급 스케줄 반영
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            실시간 재고 데이터 연동을 통해 수급 긴급성에 따른 일별 생산 우선순위 재조정 수립
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-brand-600 font-medium">
+                        <span>재고 연동 프로세스</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-xl p-6 border border-slate-200/80 shadow-sm card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-50 text-brand-600 rounded-xl flex items-center justify-center mb-4 text-xl font-bold">
+                            03
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-lg mb-2">
+                            변동성 최소화
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            생산 설비 돌발 이슈 발생 시 사전 대응 매뉴얼 구축을 통해 가동 손실 및 일정 차질 극복
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-brand-600 font-medium">
+                        <span>설비 예방 보전안</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Lower Section: Detailed Description & Contact -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Detailed Description (2 Cols) -->
+            <section class="lg:col-span-2 bg-white rounded-xl p-6 sm:p-8 border border-slate-200/80 shadow-sm">
+                <h2 class="text-xl font-bold text-slate-900 mb-4 pb-3 border-b border-slate-100 flex items-center gap-2">
+                    <i class="fa-solid fa-file-text text-brand-600"></i>
+                    회의 상세 안내
+                </h2>
+                
+                <div class="prose prose-slate max-w-none text-slate-700 space-y-4 leading-relaxed text-sm sm:text-base">
+                    <p class="bg-slate-50 p-4 rounded-lg border-l-4 border-brand-600 font-medium text-slate-800">
+                        본 회의는 PM5 라인의 생산 효율성과 일정 관리 혁신을 위해 각 담당 부서 실무진이 함께 모여 실행 방안을 논의하는 긴급 안건 회의입니다.
+                    </p>
+
+                    <h4 class="font-bold text-slate-900 text-base mt-6 mb-2">■ 참석 대상 및 준비사항</h4>
+                    <ul class="list-disc pl-5 space-y-1.5 text-slate-600 text-sm">
+                        <li><strong class="text-slate-800">참석 대상:</strong> 골판지영업팀, 생산관리팀, PM5 라인 설비 담당 실무자</li>
+                        <li><strong class="text-slate-800">지참 자료:</strong> 부서별 최근 1개월 PM5 스케줄 변동 현황 및 개선 아이디어</li>
+                    </ul>
+
+                    <!-- Structured Fact Classification Section -->
+                    <div class="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm">
+                        <div class="font-bold text-slate-900 mb-2 flex items-center gap-1.5">
+                            <i class="fa-solid fa-shield-halved text-brand-600"></i>
+                            공지 사항 확인 및 검증 가이드
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+                            <div class="p-3 bg-white rounded-lg border border-slate-200">
+                                <span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800 mb-1">확정 사실 (Fact)</span>
+                                <p class="text-slate-600">안건 내용 (스케줄 현황, 재고 반영, 설비 변동 최소화) 및 회의 추진 일정</p>
+                            </div>
+                            <div class="p-3 bg-white rounded-lg border border-slate-200">
+                                <span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-800 mb-1">추후 확인 필요 (Needs Verification)</span>
+                                <p class="text-slate-600">회의 세부 장소(회의실) 및 참석자별 개별 내선번호 안내</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact & Inquiry Box (1 Col) -->
+            <section id="contact-section" class="bg-gradient-to-br from-brand-900 to-brand-800 text-white rounded-xl p-6 sm:p-8 shadow-md flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-headset"></i>
+                            문의처
+                        </h2>
+                        <span class="px-2.5 py-1 bg-white/10 rounded-full text-xs text-blue-100">영업/스케줄 문의</span>
+                    </div>
+
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <span class="text-xs text-blue-200 block mb-1">담당 부서</span>
+                            <p class="text-base font-semibold">골판지영업팀</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-blue-200 block mb-1">내선 번호</span>
+                            <div class="flex items-center gap-2">
+                                <p id="phone-number" class="text-xl font-bold tracking-wider text-white">
+                                    [내선번호 입력 필요]
+                                </p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-blue-200 leading-relaxed bg-white/5 p-3 rounded-lg border border-white/10">
+                            ※ 회의 관련 사전에 전달할 안건이 있으신 분은 골판지영업팀 담당자에게 메일 또는 내선으로 연락 바랍니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-2 pt-4 border-t border-white/10">
+                    <button onclick="copyToClipboard('[골판지영업팀] PM5 스케줄 혁신 회의 문의')" class="w-full bg-white text-brand-900 hover:bg-blue-50 font-bold py-2.5 px-4 rounded-lg text-sm transition flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-copy"></i>
+                        문의제목 복사하기
+                    </button>
+                    <button onclick="openInquiryModal()" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition flex items-center justify-center gap-2 border border-blue-400/30">
+                        <i class="fa-regular fa-envelope"></i>
+                        온라인 간편 문의
+                    </button>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-xs">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:flex sm:justify-between sm:items-center">
+            <p>© 2026 Internal Operations System. All rights reserved.</p>
+            <p class="mt-2 sm:mt-0 text-slate-500">본 페이지는 사내 임직원 전용 보안 공지사항입니다.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3 z-50">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toast-message" class="text-sm font-medium">메시지</span>
+    </div>
+
+    <!-- Inquiry Modal -->
+    <div id="inquiry-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 px-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative animate-fade-in">
+            <button onclick="closeInquiryModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-lg font-bold text-slate-900 mb-1">골판지영업팀 문의 전달</h3>
+            <p class="text-xs text-slate-500 mb-4">PM5 스케줄 혁신 회의 관련 문의사항을 남겨주세요.</p>
+            
+            <form onsubmit="handleInquirySubmit(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">성함 / 부서</label>
+                    <input type="text" required placeholder="예: 홍길동 과장 (생산관리팀)" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">문의 내용</label>
+                    <textarea rows="3" required placeholder="문의하실 안건 내용을 간단히 적어주세요." class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-800 text-white font-bold py-2.5 rounded-lg text-sm transition">
+                    문의 제출하기
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Copy functionality
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showToast('클립보드에 복사되었습니다.');
+        }
+
+        // Smooth Scroll to Contact
+        function scrollToContact() {
+            document.getElementById('contact-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Show Toast Notification
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.innerText = msg;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Download ICS Calendar file
+        function addToCalendar() {
+            const icsData = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Internal Notice//PM5 Meeting//KO
+BEGIN:VEVENT
+SUMMARY:PM5 스케줄 업무 혁신 회의
+DESCRIPTION:PM5 생산 스케줄 업무 혁신을 위한 담당자 긴급 회의\\n1. PM5 스케줄 현황 보고\\n2. 재고 상황에 따른 긴급 스케줄 반영\\n3. 생산 설비 문제에 따른 스케줄 변동 최소화
+DTSTART:20261021T050000Z
+DTEND:20261021T060000Z
+LOCATION:사내 회의실
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'PM5_스케줄_업무_혁신_회의.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showToast('일정 파일(.ics)이 다운로드 되었습니다.');
+        }
+
+        // Modal Handlers
+        function openInquiryModal() {
+            const modal = document.getElementById('inquiry-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeInquiryModal() {
+            const modal = document.getElementById('inquiry-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function handleInquirySubmit(e) {
+            e.preventDefault();
+            closeInquiryModal();
+            showToast('문의사항이 골판지영업팀에 전달되었습니다.');
+        }
+    </script>
+</body>
+</html>
